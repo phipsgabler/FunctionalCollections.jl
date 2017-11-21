@@ -40,10 +40,17 @@ using Base.Test
 
     @testset "iteration" begin
         arr2 = Int[]
-        for i in PersistentList(1:1000)
+        for i in PersistentList(1:100)
             push!(arr2, i)
         end
-        @test collect(1:1000) == arr2
+        @test collect(1:100) == arr2
+        @test collect(1:100) == collect(PersistentList(1:100))
+    end
+
+    @testset "indexing" begin
+        l = PersistentList(1:10)
+        @test all(l[i] == i for i in 1:10)
+        @test l[end] == 10
     end
 
     @testset "map" begin
