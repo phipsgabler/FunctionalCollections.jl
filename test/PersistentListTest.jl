@@ -13,6 +13,14 @@ using Base.Test
         @test PersistentList(1:100) == PersistentList(1:100)
         @test PersistentList(1:100) != PersistentList(1:99)
         @test PersistentList(1:100) == collect(1:100)
+
+        @test plist([]) == []
+        @test plist([2]) != [1]
+        @test plist([NaN])!= [NaN]
+
+        @test isequal(plist([]), [])
+        @test !isequal(plist([2]), [1])
+        @test isequal(plist([NaN]), [NaN])
     end
 
     @testset "head" begin
@@ -58,11 +66,17 @@ using Base.Test
     end
 
     @testset "reverse" begin
-        @test reverse(PersistentList(1:10)) == 10:-1:1
+        @test reverse(PersistentList(1:10)) == collect(10:-1:1)
     end
 
     @testset "hash" begin
         @test hash(PersistentList(1:1000)) == hash(PersistentList(1:1000))
+
+        ls = Any[plist([]), plist([NaN]), plist([1,2,3]), plist([1,2,NaN]),
+                 [], [NaN], [1,2,3], [1,2,NaN]]
+        for a in ls, b in ls
+            @test isequal(a, b) == (hash(a) == hash(b))
+        end
     end
 
     @testset "isempty" begin
