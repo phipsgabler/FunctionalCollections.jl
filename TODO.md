@@ -1,0 +1,9 @@
+- [ ] `iteratorsize`, `eltype`, etc. ([iterator interface](https://docs.julialang.org/en/stable/manual/interfaces/#man-interface-iteration-1))
+- [ ] v0.6 syntax update (`immutable`, `where`,...)
+- [ ] `append` ~> `vcat`, `get` -> `getindex`, `conj`/`disj`?
+- [ ] `intersect` for `PersistentSet`
+- [ ] More general constructors for generic iterators (esp. for `PersistentList`)
+- [ ] `PMap`: `KeyError` instead of `error`
+- [ ] proper usage of `isless` and `isequal`
+- [ ] idiomatic `show` implementations
+- [ ] `queue` ~> `pqueue` etc.
